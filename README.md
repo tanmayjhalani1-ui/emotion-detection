@@ -1,3 +1,13 @@
+<div align="center">
+  <img src="assets/portfolio-banner.svg" alt="Facial Expression Classification — Tanmay Jhalani" width="100%" />
+</div>
+
+<div align="center">
+  <strong>Designed and engineered by Tanmay Jhalani</strong> · <a href="https://github.com/tanmayjhalani1-ui">GitHub Profile</a>
+</div>
+
+---
+
 # Facial Expression Classification
 
 A TensorFlow/Keras CNN project for classifying facial images into the seven FER-2013 dataset categories. The repository includes reproducible training, MLflow experiment tracking, image inference, a Streamlit interface, a FastAPI service, Docker and GitHub Actions CI.
