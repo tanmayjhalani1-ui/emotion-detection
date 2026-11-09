@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Compile application
+        run: python -m compileall -q src api app.py
+      - name: Validate CNN architectures
+        run: |
+          python - <<'PY'
+          from src.train import build_model, CLASS_NAMES
+          for variant in ("cnn_v1", "cnn_v2"):
+              model = build_model(variant)
+              assert model.input_shape == (None, 48, 48, 1)
+              assert model.output_shape == (None, len(CLASS_NAMES))
+              print(variant, model.count_params())
+          PY
